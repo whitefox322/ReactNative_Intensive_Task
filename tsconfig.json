@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"noImplicitAny": false,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitThis": true,
+		"skipLibCheck": true,
+		"strictNullChecks": false,
+		"module": "es6",
+		"moduleResolution": "node",
+		"target": "es6",
+		"baseUrl": "src",
+		"jsx": "preserve",
+		"strict": true
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

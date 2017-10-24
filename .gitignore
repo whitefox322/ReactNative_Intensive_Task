@@ -1,0 +1,6 @@
+node_modules/
+babel_cache/
+public/assets/
+package-lock.json
+*/**/*.jsx
+.idea/
