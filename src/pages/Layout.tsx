@@ -4,11 +4,17 @@ import {connect} from "react-redux";
 import uaUA from "../resources/ant/localization/ua_UA";
 import {LocaleProvider} from "antd";
 
-interface ILayoutProps {
+import {tryGetTweets} from "actions/Layout.action";
 
+interface ILayoutProps {
+    getTweets: () => void;
 }
 
 class Layout extends Component<ILayoutProps, any> {
+    componentDidMount() {
+        this.props.getTweets();
+    }
+
     render() {
         return (
             <LocaleProvider locale={uaUA}>
@@ -23,7 +29,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        getTweets: () => dispatch(tryGetTweets())
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);
