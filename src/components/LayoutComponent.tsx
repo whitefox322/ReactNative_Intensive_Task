@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import uaUA from "../resources/ant/localization/ua_UA";
 import {LocaleProvider, Layout, Input, Icon, Button, Form} from 'antd';
 import {WrappedFormUtils} from "antd/lib/form/Form";
-
 const {Header, Content, Footer} = Layout;
 
+import {tryGetTweets} from 'actions/Layout.action';
 import whitefox from "images/white_fox.png";
 import logo from "images/logo2.png";
 
@@ -17,6 +17,7 @@ interface ILayoutProps {
 
 class LayoutComponent extends Component<ILayoutProps, any> {
     componentDidMount() {
+        this.props.getTweets();
     }
 
     handleFormSubmit = (e) => {
@@ -104,7 +105,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        getTweets: () => dispatch(tryGetTweets())
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedLayout);
