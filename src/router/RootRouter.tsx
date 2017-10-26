@@ -4,7 +4,7 @@ import {ConnectedRouter} from "react-router-redux";
 import storeConfig from "../store/storeConfig";
 import createBrowserHistory from 'history/createBrowserHistory';
 
-import Layout from "../pages/Layout";
+import LayoutComponent from "../components/LayoutComponent";
 
 const store = storeConfig();
 export const history = createBrowserHistory();
@@ -12,7 +12,7 @@ export const history = createBrowserHistory();
 const RootRouter = () => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <Layout/>
+            <LayoutComponent/>
         </ConnectedRouter>
     </Provider>
 );

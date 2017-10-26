@@ -1,0 +1,38 @@
+@media only screen and (max-width: 768px) {
+  .header {
+    &__left,
+    &__right {
+      width: 100%;
+      text-align: center;
+    }
+
+    &__right > .ant-input-affix-wrapper {
+      margin-top: 0;
+    }
+  }
+
+  .ant-layout {
+    & > .ant-layout-header {
+      height: 200px;
+    }
+
+    & > .ant-layout-content {
+      margin-top: 200px;
+    }
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .ant-layout {
+    & > .ant-layout-header,
+    & > .ant-layout-footer {
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .header__title {
+    margin-left: 0;
+  }
+}
