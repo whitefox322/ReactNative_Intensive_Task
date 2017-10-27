@@ -4,7 +4,7 @@
   "description": "Test task for React Native Intensive",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open && node server.js"
   },
   "keywords": [
     "react",
@@ -51,6 +51,7 @@
     "@types/redux-thunk": "^2.1.0",
     "antd": "^2.13.7",
     "babel-polyfill": "^6.26.0",
+    "cors": "^2.8.4",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "mime": "^2.0.3",
@@ -63,7 +64,6 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "twit": "^2.2.9",
-    "twitter": "^1.7.1"
+    "twit": "^2.2.9"
   }
 }

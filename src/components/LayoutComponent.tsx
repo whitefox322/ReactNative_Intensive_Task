@@ -11,13 +11,13 @@ import whitefox from "images/white_fox.png";
 import logo from "images/logo2.png";
 
 interface ILayoutProps {
-    getTweets: () => void;
+    getTweets: (q: string, size: number) => void;
     form: WrappedFormUtils;
 }
 
 class LayoutComponent extends Component<ILayoutProps, any> {
     componentDidMount() {
-        this.props.getTweets();
+        this.props.getTweets('js', 10);
     }
 
     handleFormSubmit = (e) => {
@@ -106,7 +106,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTweets: () => dispatch(tryGetTweets())
+        getTweets: (q, size) => dispatch(tryGetTweets(q, size))
     }
 };
 
