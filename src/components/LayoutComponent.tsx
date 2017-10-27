@@ -1,50 +1,15 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link, Switch, Route} from "react-router-dom";
-import {connect} from "react-redux";
 import uaUA from "../resources/ant/localization/ua_UA";
-import {LocaleProvider, Layout, Input, Icon, Button, Form} from 'antd';
-import {WrappedFormUtils} from "antd/lib/form/Form";
+import {LocaleProvider, Layout} from 'antd';
 const {Header, Content, Footer} = Layout;
 
-import {tryGetTweets} from 'actions/Layout.action';
+import HomePage from './HomePage';
+import SearchPage from './SearchPage';
 import whitefox from "images/white_fox.png";
 import logo from "images/logo2.png";
 
-interface ILayoutProps {
-    getTweets: (q: string, size: number) => void;
-    form: WrappedFormUtils;
-}
-
-class LayoutComponent extends Component<ILayoutProps, any> {
-    componentDidMount() {
-        this.props.getTweets('js', 10);
-    }
-
-    handleFormSubmit = (e) => {
-        e.preventDefault();
-        const {validateFields} = this.props.form;
-
-        validateFields((err, values) => {
-            if (err) {
-                console.log(err);
-                return;
-            } else {
-                console.log(values);
-                this.emptySearchField();
-            }
-        });
-    };
-
-    emptySearchField = () => {
-        this.props.form.setFieldsValue({
-            searchString: ''
-        });
-    };
-
-    render() {
-        const prefix = <Icon type="search"/>;
-        const {getFieldDecorator} = this.props.form;
-
+export const LayoutComponent = (props: any) => {
         return (
             <LocaleProvider locale={uaUA}>
                 <Layout>
@@ -57,28 +22,12 @@ class LayoutComponent extends Component<ILayoutProps, any> {
                                 </div>
                             </Link>
                         </div>
-                        <Form className='header__right' onSubmit={this.handleFormSubmit}>
-                            {getFieldDecorator('searchString', {
-                                initialValue: ''
-                            })(
-                                <Input
-                                    placeholder="I'm looking for..."
-                                    prefix={prefix}
-                                />
-                            )}
-                            <Button type="dashed" onClick={this.handleFormSubmit}>
-                                Search
-                            </Button>
-                        </Form>
                     </Header>
                     <Content>
-                        <div className='container'>
-                            <div style={{fontSize: 36}}>Hello React Native!</div>
-                            <div style={{fontSize: 36}}>Hello React Native!</div>
-                            <div style={{fontSize: 36}}>Hello React Native!</div>
-                            <div style={{fontSize: 36}}>Hello React Native!</div>
-                            <div style={{fontSize: 36}}>Hello React Native!</div>
-                        </div>
+                        <Switch>
+                            <Route exact path='/' component={HomePage}/>
+                            <Route exact path='/search' component={SearchPage}/>
+                        </Switch>
                     </Content>
                     <Footer>
                         Developed by &copy;
@@ -90,24 +39,4 @@ class LayoutComponent extends Component<ILayoutProps, any> {
                 </Layout>
             </LocaleProvider>
         );
-    }
-}
-
-const WrappedLayout: any = Form.create<any>({
-    mapPropsToFields() {
-        return {};
-    }
-})(LayoutComponent);
-
-
-const mapStateToProps = (state, ownProps) => {
-    return {}
 };
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getTweets: (q, size) => dispatch(tryGetTweets(q, size))
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedLayout);

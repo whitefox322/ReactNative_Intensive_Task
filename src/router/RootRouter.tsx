@@ -4,7 +4,7 @@ import {ConnectedRouter} from "react-router-redux";
 import storeConfig from "../store/storeConfig";
 import createBrowserHistory from 'history/createBrowserHistory';
 
-import LayoutComponent from "../components/LayoutComponent";
+import {LayoutComponent} from "../components/LayoutComponent";
 
 const store = storeConfig();
 export const history = createBrowserHistory();

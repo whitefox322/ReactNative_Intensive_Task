@@ -1,14 +1,6 @@
 declare module "react-hot-loader";
 
-interface RequireImport {
-    default: any;
-}
-
 // stubs to enable load resources from modules
-
-interface NodeModule {
-    hot: any;
-}
 
 declare module "*.png" {
     const value: any;

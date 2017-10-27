@@ -15,13 +15,6 @@ var app = express();
 app.use(cors());
 
 app.get("/:q/:count", function(req, res) {
-    // const params = {
-    //     q: 'akshay',
-    //     count: 10
-    // };
-    //
-
-    console.log(req);
     T.get('search/tweets', req.params, function(err, data, response) {
         res.status(200)
             .end(JSON.stringify(data));
@@ -29,5 +22,5 @@ app.get("/:q/:count", function(req, res) {
 });
 
 app.listen(8081, function() {
-    console.log("Server listening 8081");
+    console.log("Server listening port 8081");
 });
