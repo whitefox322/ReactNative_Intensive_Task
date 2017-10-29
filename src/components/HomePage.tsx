@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Input, Icon, Button, Form, Spin} from 'antd';
+import {Input, Select, Button, Form, Spin} from 'antd';
 import {WrappedFormUtils} from "antd/lib/form/Form";
+const InputGroup = Input.Group;
+const Option = Select.Option;
 
 import {tryGetTweets} from 'actions/HomePage.action';
 import {TwitterComponent} from './TwitterComponent';
@@ -32,7 +34,11 @@ class HomePage extends Component<IHomePageProps, any> {
                 console.log(err);
                 return;
             } else {
-                this.props.history.push(`/search?q=${values.searchString}`);
+                if(values.searchSelector === 'Option2') {
+                    this.props.history.push(`/search?q=%23${values.searchString}`);
+                } else {
+                    this.props.history.push(`/search?q=${values.searchString}`);
+                }
                 resetFields();
             }
         });
@@ -51,22 +57,34 @@ class HomePage extends Component<IHomePageProps, any> {
                 return <PageNotFound/>;
             }
         }
-        const prefix = <Icon type="search"/>;
         const {getFieldDecorator} = this.props.form;
         const {tweets} = this.props;
 
         return (
             <div className='container'>
                 <Form className='header__right' onSubmit={this.handleFormSubmit}>
-                    {getFieldDecorator('searchString', {
-                        initialValue: ''
-                    })(
-                        <Input
-                            placeholder="I'm looking for..."
-                            prefix={prefix}
-                        />
-                    )}
-                    <Button type="dashed" onClick={this.handleFormSubmit}>
+                    <InputGroup compact>
+                        {getFieldDecorator('searchSelector', {
+                            initialValue: 'Option1'
+                        })(
+                            <Select>
+                                <Option value="Option1"/>
+                                <Option value="Option2">#</Option>
+                            </Select>
+                        )}
+                        {getFieldDecorator('searchString', {
+                            initialValue: ''
+                        })(
+                            <Input
+                                placeholder="I'm looking for..."
+                            />
+                        )}
+                    </InputGroup>
+                    <Button
+                        type="dashed"
+                        onClick={this.handleFormSubmit}
+                        className='header__right--button'
+                    >
                         Search
                     </Button>
                 </Form>

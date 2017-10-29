@@ -13,18 +13,29 @@
     text-align: right;
     z-index: 2;
 
-    & > .ant-input-affix-wrapper {
+    & > .ant-input-group.ant-input-group-compact {
+      display: inline-block;
       width: 50%;
-      font-size: 16px;
       margin-top: 20px;
-      cursor: pointer;
 
       & > .ant-input {
         font-family: 'Dosis', sans-serif;
         height: auto;
         font-size: 16px;
-        padding-left: 26px !important;
         cursor: pointer;
+        width: 80%;
+        margin-top: -7px;
+      }
+
+      & > .ant-select {
+        margin-top: -7px;
+        cursor: pointer;
+
+        & > .ant-select-selection--single {
+          font-family: 'Dosis', sans-serif;
+          font-size: 16px;
+          height: 34px !important;
+        }
       }
     }
 
