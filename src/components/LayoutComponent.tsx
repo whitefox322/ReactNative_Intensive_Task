@@ -6,6 +6,7 @@ const {Header, Content, Footer} = Layout;
 
 import HomePage from './HomePage';
 import SearchPage from './SearchPage';
+import {PageNotFound} from "./PageNotFound";
 import whitefox from "images/white_fox.png";
 import logo from "images/logo2.png";
 
@@ -27,6 +28,7 @@ export const LayoutComponent = () => {
                         <Switch>
                             <Route exact path='/' component={HomePage}/>
                             <Route exact path='/search' component={SearchPage}/>
+                            <Route exact path='*' component={PageNotFound}/>
                         </Switch>
                     </Content>
                     <Footer>
