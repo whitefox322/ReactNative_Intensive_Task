@@ -1,4 +1,4 @@
-import {LOAD__TWEETS} from 'constants/Layout.constants';
+import {LOAD__HOME__TWEETS} from 'constants/HomePage.constants';
 
 export const tryGetTweets = (params, size) => dispatch => {
     const URL = `http://127.0.0.1:8081/${params}/${size}`;
@@ -11,13 +11,13 @@ export const tryGetTweets = (params, size) => dispatch => {
         if (this.readyState !== this.DONE) {
             return;
         }
-        dispatch(LoadTweets(this.response.statuses));
+        dispatch(LoadHomeTweets(this.response.statuses));
     });
 };
 
-const LoadTweets: any = (payload: Array<any>) => {
+const LoadHomeTweets: any = (payload: Array<any>) => {
     return {
-        type: LOAD__TWEETS,
+        type: LOAD__HOME__TWEETS,
         payload: payload
     }
 };

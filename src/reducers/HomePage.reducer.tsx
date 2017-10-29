@@ -1,12 +1,12 @@
-import {LOAD__TWEETS} from 'constants/Layout.constants';
+import {LOAD__HOME__TWEETS} from 'constants/HomePage.constants';
 
 const initialState = {
     tweets: []
 };
 
-const LayoutReducer = (state: any = initialState, action) => {
+const HomePageReducer = (state: any = initialState, action) => {
     switch (action.type) {
-        case LOAD__TWEETS:
+        case LOAD__HOME__TWEETS:
             return {
                 ...state,
                 tweets: action.payload
@@ -16,5 +16,5 @@ const LayoutReducer = (state: any = initialState, action) => {
     }
 };
 
-export default LayoutReducer;
+export default HomePageReducer;
 

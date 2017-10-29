@@ -1,10 +1,12 @@
 import {combineReducers} from "redux";
 import {routerReducer} from 'react-router-redux';
 
-import LayoutReducer from './Layout.reducer';
+import HomePageReducer from './HomePage.reducer';
+import SearchPageReducer from './SearchPage.reducer';
 
 const rootReducer = combineReducers({
-    layout: LayoutReducer,
+    home: HomePageReducer,
+    search: SearchPageReducer,
     router: routerReducer
 });
 

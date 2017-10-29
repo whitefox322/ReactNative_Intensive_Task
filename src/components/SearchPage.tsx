@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import {Spin} from 'antd';
 
-import {tryGetTweets} from 'actions/Layout.action';
+import results from 'images/results.png';
+import {tryGetTweets} from 'actions/SearchPage.action';
 import {TwitterComponent} from './TwitterComponent';
 import {PageNotFound} from "./PageNotFound";
 
@@ -12,9 +14,13 @@ interface ISearchPageProps {
 }
 
 class SearchPage extends Component<ISearchPageProps, any> {
+    state = {
+        isLoading: false
+    };
+
     componentDidMount() {
         if(this.getQueryString()) {
-            this.props.getTweets(this.getQueryString(), 20);
+            this.props.getTweets(this.getQueryString(), 30);
         }
     }
 
@@ -26,11 +32,27 @@ class SearchPage extends Component<ISearchPageProps, any> {
     };
 
     render() {
-        if(!this.props.tweets.length) {
-            return <PageNotFound/>;
+        if (!this.props.tweets.length) {
+            if (!this.state.isLoading) {
+                setTimeout(() => {
+                    this.setState({
+                        isLoading: !this.state.isLoading
+                    });
+                }, 3000);
+                return <Spin size='large' tip='Loading...'/>;
+            } else {
+                return <PageNotFound/>;
+            }
         }
+
         return (
             <div className='container'>
+                <div className='header__right'>
+                    <img src={results} alt="results" className='header__results'/>
+                </div>
+                <div className='container__top'>
+                    Search Results:
+                </div>
                 {
                     this.props.tweets.map((item, index) => {
                         return <TwitterComponent
@@ -39,6 +61,11 @@ class SearchPage extends Component<ISearchPageProps, any> {
                         />
                     })
                 }
+                <div className='container__bottom'>
+                    <div className='container__bottom--link' onClick={() => {scrollTo(0, 0)}}>
+                        Go to top
+                    </div>
+                </div>
             </div>
         );
     }
@@ -46,7 +73,7 @@ class SearchPage extends Component<ISearchPageProps, any> {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        tweets: state.layout.tweets,
+        tweets: state.search.tweets,
         location: ownProps.location
     }
 };

@@ -9,7 +9,7 @@ import SearchPage from './SearchPage';
 import whitefox from "images/white_fox.png";
 import logo from "images/logo2.png";
 
-export const LayoutComponent = (props: any) => {
+export const LayoutComponent = () => {
         return (
             <LocaleProvider locale={uaUA}>
                 <Layout>

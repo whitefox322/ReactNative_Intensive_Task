@@ -1,0 +1,1 @@
+export const LOAD__SEARCHED__TWEETS: string = "LOAD__SEARCHED__TWEETS";

@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Input, Icon, Button, Form} from 'antd';
+import {Input, Icon, Button, Form, Spin} from 'antd';
 import {WrappedFormUtils} from "antd/lib/form/Form";
 
-import {tryGetTweets} from 'actions/Layout.action';
+import {tryGetTweets} from 'actions/HomePage.action';
 import {TwitterComponent} from './TwitterComponent';
+import {PageNotFound} from "./PageNotFound";
 
 interface IHomePageProps {
     tweets: Array<any>;
@@ -14,8 +15,12 @@ interface IHomePageProps {
 }
 
 class HomePage extends Component<IHomePageProps, any> {
+    state = {
+        isLoading: false
+    };
+
     componentDidMount() {
-        this.props.getTweets('%23javascript', 20);
+        this.props.getTweets('%23javascript', 30);
     }
 
     handleFormSubmit = (e) => {
@@ -34,6 +39,18 @@ class HomePage extends Component<IHomePageProps, any> {
     };
 
     render() {
+        if (!this.props.tweets.length) {
+            if (!this.state.isLoading) {
+                setTimeout(() => {
+                    this.setState({
+                        isLoading: !this.state.isLoading
+                    });
+                }, 3000);
+                return <Spin size='large' tip='Loading...'/>;
+            } else {
+                return <PageNotFound/>;
+            }
+        }
         const prefix = <Icon type="search"/>;
         const {getFieldDecorator} = this.props.form;
         const {tweets} = this.props;
@@ -53,6 +70,7 @@ class HomePage extends Component<IHomePageProps, any> {
                         Search
                     </Button>
                 </Form>
+                <div id='#start'/>
                 {
                     tweets.map((item, index) => {
                         return <TwitterComponent
@@ -61,6 +79,11 @@ class HomePage extends Component<IHomePageProps, any> {
                             />
                     })
                 }
+                <div className='container__bottom'>
+                    <div className='container__bottom--link' onClick={() => {scrollTo(0, 0)}}>
+                        Go to top
+                    </div>
+                </div>
             </div>
         );
     }
@@ -74,7 +97,7 @@ const WrappedHomePage: any = Form.create<any>({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        tweets: state.layout.tweets,
+        tweets: state.home.tweets,
         history: ownProps.history
     }
 };

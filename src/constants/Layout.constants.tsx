@@ -1,1 +1,0 @@
-export const LOAD__TWEETS: string = "LOAD__TWEETS";

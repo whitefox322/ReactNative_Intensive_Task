@@ -8,5 +8,9 @@ interface ISearchPageProps {
 export const TwitterComponent = (props: ISearchPageProps) => {
     const {data} = props;
     const linkProps = {target: '_blank'};
-        return <Tweet data={data} linkProps={linkProps}/>;
+        return (
+            <div className='twit'>
+                <Tweet data={data} linkProps={linkProps}/>
+            </div>
+        );
 };
